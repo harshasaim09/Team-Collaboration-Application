@@ -1,0 +1,101 @@
+<!Doctype html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="../static/bootstrap/css/main.css">
+
+</head>
+<body>
+<% include header.ejs %>
+
+<div class="container-fluid">
+<div class="line">
+  <div class="col-md-9">
+      <div class="panel panel-default">
+            <div class="panel-heading">Tasks
+			<button type="button" id="addButton" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#exampleModalLive">Add Task</button>
+			</div>
+                <div class="panel-body">
+				<table class="table">
+				<thead>
+				<tr>
+				<th>5 star</th>
+				<th>4 star</th>
+				<th>3 star</th>
+				<th>2 star</th>
+				<th>1 star</th>
+				</tr>
+				</thead>
+				<tbody>
+				
+				</tbody>
+				</table>
+				</div>
+        </div>
+  </div>
+  
+  
+
+    <div class="col-md-3" >
+        <div class="panel panel-default">
+            <div class="panel-heading">Leaderboard</div>
+                <div class="panel-body"></div>
+        </div>
+    </div>
+
+
+
+    <div class="col-md-9">
+        <div class="panel panel-default">
+        <div class="panel-heading">Bitbucket Updates</div>
+                <div class="panel-body" style="height: 250px;overflow-y: auto;">
+                    <%var count = 1;%>
+                    <%for(var commit in commitsArray) {%>
+                    <p><%=count%>. Author: <%=commitsArray[commit].author%></p>
+                    <p>Date: <%=commitsArray[commit].date%></p>
+                    <p>Repository: <%=commitsArray[commit].reponame%></p>
+                    <p>Message: <%=commitsArray[commit].message%></p>
+                    <%count++;%>
+                   <% }%>
+                   <br>
+                </div>
+</div>
+    </div>
+    <div class="col-md-3" >
+        <div class="panel panel-default">
+            <div class="panel-heading">Chat</div>
+                <div class="panel-body" style="height: 250px;">
+                    <script id="cid0010000158966799975" data-cfasync="false" 
+                    async src="http://st.chatango.com/js/gz/emb.js" style="width:270px;height:235px;">
+                    {"handle":"teamrubick","arch":"js","styles":{"b":100,"v":0,"w":0,"p":10,"cnrs":0.25,"usricon":0.75}}</script>
+                </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Woohoo, you're reading this text in a modal!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<% include footer.ejs %>
+</body>
+
+</html>

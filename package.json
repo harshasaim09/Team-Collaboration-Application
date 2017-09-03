@@ -1,0 +1,17 @@
+{
+  "name": "rubick",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "latest",
+    "aws-sdk": "*",
+	  "ejs": "latest",
+    "express-ejs-layouts": "latest",
+	  "body-parser": "latest",
+    "request": "latest",
+	"materialize-css": "latest"
+  }
+}
