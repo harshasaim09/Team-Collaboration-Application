@@ -1,55 +1,243 @@
-<!Doctype html>
-<html lang="en">
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-<link rel="stylesheet" type="text/css" href="../static/bootstrap/css/main.css">
 
-</head>
 <body>
 <% include header.ejs %>
 
 <div class="container-fluid">
-<div class="line">
-  <div class="col-md-9">
-      <div class="panel panel-default">
-            <div class="panel-heading">Tasks
-			<button type="button" id="addButton" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#exampleModalLive">Add Task</button>
+<div class="row" style="height: 900px;overflow-y: scroll;">
+      <div class="panel panel-default" style="height: 900px;overflow-y: auto;">
+            <div class="panel-heading clearfix">
+			<div><strong>Team Name: <%=teamName%></strong></div>
+			<div class="btn-group pull-right">
+				<a class="btn btn-default btn-sm" onclick="retrieveOpen()">Open Tasks</a>
+				<a class="btn btn-default btn-sm" id="restoreBtn" style="display:none" onclick="restoreSelected()">Restore Tasks</a>
+        <a id="restoreReload" style="display:none"></a>
+				<a class="btn btn-default btn-sm" onclick="retrieveArchive()">Archive</a>
+				<a id="addTask" class="btn btn-default btn-sm" onclick="document.getElementById('taskModal').style.display='block'">Add Task</a>
 			</div>
-                <div class="panel-body">
-				<table class="table">
-				<thead>
+			</div>
+      <div id="trash" style="display: inline-block;"><span><strong>Submit Task</strong></span></div>
+		<table id="openTasks" class="table" style="table-layout: fixed;">
+			<thead>
 				<tr>
-				<th>5 star</th>
-				<th>4 star</th>
-				<th>3 star</th>
-				<th>2 star</th>
-				<th>1 star</th>
+				<th><span class="fa fa-star fa-2x yellow-icon"></span><span class="fa fa-star fa-2x"></span><span class="fa fa-star fa-2x"></span><span class="fa fa-star fa-2x"></span><span class="fa fa-star fa-2x"></span></th>
+				<th><span class="fa fa-star fa-2x yellow-icon"></span><span class="fa fa-star fa-2x"></span><span class="fa fa-star fa-2x"></span><span class="fa fa-star fa-2x"></span></th>
+				<th><span class="fa fa-star fa-2x yellow-icon"></span><span class="fa fa-star fa-2x"></span><span class="fa fa-star fa-2x"></span></th>
+				<th><span class="fa fa-star fa-2x"></span><span class="fa fa-star fa-2x"></span></th>
+				<th><span class="fa fa-star fa-2x"></span></th>
 				</tr>
-				</thead>
-				<tbody>
-				
-				</tbody>
-				</table>
+			</thead>
+	<tbody>
+		<%if(taskRecords) {%>
+		<%for (var record=0;record < taskRecords.length;record++) {%>
+			<tr>
+			<%if(taskRecords[record].rating==5){%>
+			<td>
+              <div class="row">
+                  <div class="col">
+					<div id="status<%=taskRecords[record].rating%>" class="status">
+						<div class="tasks_container">
+							<div class="tasks">
+								<p><%=taskRecords[record].description%></p>
+								<br><p>Assigned To: <%=taskRecords[record].assignedTo%></p>
+								<br><p>Due date: <%=taskRecords[record].dueDate%></p>
+								<p id="taskId" style="display:none"><%=taskRecords[record].taskId%></p>
+								<p id="rating" style="display:none"><%=taskRecords[record].rating%></p>
+							</div>
+						</div>
+					</div>
 				</div>
-        </div>
-  </div>
-  
-  
+			 </div>
+          </td>
+		  <%}else{%>
+		  <td></td>
+		  <%}%>
+		  <%if(taskRecords[record].rating==4){%>
+			<td>
+              <div class="row">
+                  <div class="col">
+					<div id="status<%=taskRecords[record].rating%>" class="status">
+						<div class="tasks_container">
+							<div class="tasks">
+								<p><%=taskRecords[record].description%></p>
+								<br><p>Assigned To: <%=taskRecords[record].assignedTo%></p>
+								<br><p>Due date: <%=taskRecords[record].dueDate%></p>
+								<p id="taskId" style="display:none"><%=taskRecords[record].taskId%></p>
+								<p id="rating" style="display:none"><%=taskRecords[record].rating%></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			   </div>
+          </td>
+		  <%}else{%>
+		  <td></td>
+		  <%}%>
+		 <%if(taskRecords[record].rating==3){%>
+			<td>
+              <div class="row">
+                  <div class="col">
+					<div id="status<%=taskRecords[record].rating%>" class="status">
+						<div class="tasks_container">
+							<div class="tasks">
+								<p><%=taskRecords[record].description%></p>
+								<br><p>Assigned To: <%=taskRecords[record].assignedTo%></p>
+								<br><p>Due date: <%=taskRecords[record].dueDate%></p>
+								<p id="taskId" style="display:none"><%=taskRecords[record].taskId%></p>
+								<p id="rating" style="display:none"><%=taskRecords[record].rating%></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			   </div>
+          </td>
+		  <%}else{%>
+		  <td></td>
+		  <%}%>
+		 <%if(taskRecords[record].rating==2){%>
+			<td>
+              <div class="row">
+                  <div class="col">
+					<div id="status<%=taskRecords[record].rating%>" class="status">
+						<div class="tasks_container">
+							<div class="tasks">
+								<p><%=taskRecords[record].description%></p>
+								<br><p>Assigned To: <%=taskRecords[record].assignedTo%></p>
+								<br><p>Due date: <%=taskRecords[record].dueDate%></p>
+								<p id="taskId" style="display:none"><%=taskRecords[record].taskId%></p>
+								<p id="rating" style="display:none"><%=taskRecords[record].rating%></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			  </div>
+          </td>
+		  <%}else{%>
+		  <td></td>
+		  <%}%>
+		 <%if(taskRecords[record].rating==1){%>
+			<td>
+              <div class="row">
+                  <div class="col">
+					<div id="status<%=taskRecords[record].rating%>" class="status">
+						<div class="tasks_container">
+							<div class="tasks">
+								<p><%=taskRecords[record].description%></p>
+								<br><p>Assigned To: <%=taskRecords[record].assignedTo%></p>
+								<br><p>Due date: <%=taskRecords[record].dueDate%></p>
+								<p id="taskId" style="display:none"><%=taskRecords[record].taskId%></p>
+								<p id="rating" style="display:none"><%=taskRecords[record].rating%></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			  </div>
+          </td>
+		  <%}else{%>
+		  <td></td>
+		  <%}%>
+		  </tr>
+				<%}%>
+				<%} else {%>
+				<tr>
+				<td>
+				  <div class="row">
+					  <div class="col">
+						<div id="status5" class="status">
+							<div class="tasks_container">
 
-    <div class="col-md-3" >
-        <div class="panel panel-default">
-            <div class="panel-heading">Leaderboard</div>
-                <div class="panel-body"></div>
-        </div>
-    </div>
+							</div>
+						</div>
+					</div>
+				  </div>
+				</td>
+				<td>
+				  <div class="row">
+					  <div class="col">
+						<div id="status4" class="status">
+							<div class="tasks_container">
+
+							</div>
+						</div>
+					</div>
+				  </div>
+				</td>
+				<td>
+				  <div class="row">
+					  <div class="col">
+						<div id="status3" class="status">
+							<div class="tasks_container">
+
+							</div>
+						</div>
+					</div>
+				  </div>
+				</td>
+				<td>
+				  <div class="row">
+					  <div class="col">
+						<div id="status2" class="status">
+							<div class="tasks_container">
+
+							</div>
+						</div>
+					</div>
+				  </div>
+				</td>
+
+
+				<td>
+				  <div class="row">
+					  <div class="col">
+						<div id="status1" class="status">
+							<div class="tasks_container">
+
+							</div>
+						</div>
+					</div>
+				  </div>
+				</td>
+				</tr>
+				<%}%>
+
+			</tbody>
+		</table>
+		<table style="display:none" id="archivedTasks" class="table" border="1">
+			<thead>
+				<tr>
+				  <th><input type="checkbox" class="checkAll" name="checkAll"/>Select All</th>
+				  <th>Task Description</th>
+				  <th>Assigned To</th>
+				  <th>Assigned Date</th>
+				  <th>Submitted By</th>
+				  <th>Points</th>
+				</tr>
+			</thead>
+			<tbody>
+			  <%if(archivedTasks){%>
+			  <%for(var record=0;record < archivedTasks.length;record++) {%>
+			  <tr role="row" >
+				<td><input type="checkbox" name="check" id="<%=archivedTasks[record].taskId%>" /></td>
+				<td><%=archivedTasks[record].description%></td>
+				<td><%=archivedTasks[record].assignedTo%></td>
+				<td><%=archivedTasks[record].dueDate%></td>
+				<td id="completedBy"><%=archivedTasks[record].completedBy%></td>
+				<td id="points"><%=archivedTasks[record].rating%></td>
+			  </tr>
+			  <%}%>
+				<%} else {%>
+				<p>No archived tasks</p>
+				<%}%>
+			</tbody>
+		</table>
+	</div>
+</div>
 
 
 
-    <div class="col-md-9">
+    <div class="bitbucket_updates">
         <div class="panel panel-default">
         <div class="panel-heading">Bitbucket Updates</div>
-                <div class="panel-body" style="height: 250px;overflow-y: auto;">
+                <div class="panel-body" style="height: 100px;overflow-y: auto;">
                     <%var count = 1;%>
                     <%for(var commit in commitsArray) {%>
                     <p><%=count%>. Author: <%=commitsArray[commit].author%></p>
@@ -60,42 +248,68 @@
                    <% }%>
                    <br>
                 </div>
-</div>
+		</div>
     </div>
-    <div class="col-md-3" >
+ <!--   <div class="col-md-3" >
         <div class="panel panel-default">
             <div class="panel-heading">Chat</div>
-                <div class="panel-body" style="height: 250px;">
-                    <script id="cid0010000158966799975" data-cfasync="false" 
-                    async src="http://st.chatango.com/js/gz/emb.js" style="width:270px;height:235px;">
-                    {"handle":"teamrubick","arch":"js","styles":{"b":100,"v":0,"w":0,"p":10,"cnrs":0.25,"usricon":0.75}}</script>
+                <div id="flashcontent" class="panel-body" style="height: 250px;">
+
                 </div>
         </div>
-    </div>
-</div>
+    </div> -->
+	<script id="cid0010000158966799975" data-cfasync="false"
+					async src="//st.chatango.com/js/gz/emb.js" style="width: 269px;height: 300px;">
+					{"handle":"teamrubick","arch":"js","styles":{"a":"CC0000","b":100,"c":"FFFFFF","d":"FFFFFF","k":"CC0000","l":"CC0000","m":"CC0000","n":"FFFFFF","p":"10","q":"CC0000","r":100,"pos":"br","cv":1,"cvbg":"CC0000","cvw":269,"cvh":33,"ticker":1,"fwtickm":1}}</script>
+
 <!-- Modal -->
-<div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLiveLabel"  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
+<div id="taskModal" class="modal" >
+   <form class="modal-content animate">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('taskModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+		<div class="container">
+      <label for="comment">Task:</label>
+        <textarea class="form-control" rows="5" id="taskDetail"></textarea>
+      <br>
+	  <label for="assignTo">Assign To</label>
+
+	  <select class="form-control" id="assignedTo">
+	  <%if(teamMembersName) {%>
+	  <%for(var i=0;i<teamMembersName.length;i++) {%>
+	  <option id='<%=teamMembersID[i]%>'><%=teamMembersName[i]%></option>
+	  <%}%>
+	  <%}%>
+	  </select>
+
+      <label for="exampleSelect1">Level</label>
+        <select class="form-control" id="taskLevel">
+          <option value="status5">5 Star</option>
+          <option value="status4">4 Star</option>
+          <option value="status3">3 Star</option>
+          <option value="status2">2 Star</option>
+          <option value="status1">1 Star</option>
+        </select>
+		<label for="dueDate">Due Date</label>
+		<div class="input-group date" data-provide="datepicker">
+			<input type="text" class="form-control" id="datepicker">
+			<div class="input-group-addon">
+			<span class="glyphicon glyphicon-th"></span>
+		</div>
+	</div>
       </div>
-      <div class="modal-body">
-        <p>Woohoo, you're reading this text in a modal!</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+	  <div class="clearfix">
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('taskModal').style.display='none'">Close</button>
+            <button type="button" class="btn btn-primary" id="submitTask">Add Task</button>
       </div>
     </div>
-  </div>
-</div>
-</div>
 
+
+</div>
 <% include footer.ejs %>
+<script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<script src="../static/bootstrap/js/home.js"></script>
 </body>
-
-</html>

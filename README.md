@@ -4,12 +4,11 @@
 
 1. [Introduction](#introduction)
 2. [Technologies](#technologies)
-3. [Mockups](#mockups)
+3. [Demo](#demo)
 
 ## Introduction
 
 This is a website that enables teams to work collaboratively and efficiently. It consists of 4 different sections: Task cards, Repo updates, Chat and Leaderboard. Leaderboard is the distinguishing feature of this app as it lets users to know there standing among their teammates and make them competitive.
-Its work in progress at the moment.
 
 ## Technologies
 - nodeJS
@@ -17,7 +16,7 @@ Its work in progress at the moment.
 - DynamoDB
 - AWS
 
-## Mockups
-- You can view mockups [here][1] 
+## Demo
+- You can view demo [here][1]
 
-[1]: https://app.moqups.com/harshasaim09@gmail.com/pC4C81aepx/view
+[1]: https://drive.google.com/file/d/1u4Ru4-g_CbI_zEQysM5BruV6JliiP8SR/view?usp=sharing

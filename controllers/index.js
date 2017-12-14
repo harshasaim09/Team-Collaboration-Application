@@ -4,8 +4,8 @@ var api = express.Router();
  * GET home page.
  */
 
-api.get('/', function (request, response) {
-  response.render('index.ejs', { title: 'Monish Verma' });
+api.all('/', function (request, response) {
+  response.render('index', { title: 'Monish Verma' });
 });
 
 module.exports = api;

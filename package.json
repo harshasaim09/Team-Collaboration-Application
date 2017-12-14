@@ -3,15 +3,25 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha test"
   },
   "dependencies": {
-    "express": "latest",
+    "async": "latest",
     "aws-sdk": "*",
-	  "ejs": "latest",
+    "body-parser": "latest",
+    "chai": "latest",
+    "cookie-parser": "latest",
+    "d3": "latest",
+    "ejs": "latest",
+    "express": "latest",
     "express-ejs-layouts": "latest",
-	  "body-parser": "latest",
+    "express-session": "latest",
+    "mocha": "latest",
+    "nodemon": "^1.12.1",
     "request": "latest",
-	"materialize-css": "latest"
+    "sinon": "latest",
+    "@sendgrid/mail": "latest",
+    "textmagic-rest-client": "latest"
   }
 }

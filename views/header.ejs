@@ -1,9 +1,11 @@
 <!Doctype html>
 <html lang="en">
 <head>
-<title>Monish Verma</title>
+<title>Rubick</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
 <link rel="stylesheet" type="text/css" href="../static/bootstrap/css/main.css">
 </head>
 <body>
@@ -17,14 +19,82 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Rubick</a>
-      
+      <a class="navbar-brand" href="/home">Rubick</a>
+
+
     </div>
-	<div id="navbar" class="navbar-collapse collapse">
+
+    <div id="id01" class="modal">
+
+      <form class="modal-content animate">
+        <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+        </div>
+        <div class="container">
+          <label><b>Name</b></label>
+          <input type="text" placeholder="Enter Name" id="name" required>
+
+          <label><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" id="emailId" required>
+
+          <label><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" id="psw" required>
+
+          <label><b>Repeat Password</b></label>
+          <input type="password" placeholder="Repeat Password" id="psw-repeat" required>
+
+          <label><b>Phone Number</b></label>
+          <input type="text" placeholder="Phone Number" id="phonenumber" required>
+
+          <label><b>Team Name</b></label>
+          <input type="text" placeholder="Team Name" id="teamName" required>
+          <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+          <div class="clearfix">
+            <button onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <button type="button" class="signupbtn" onclick="signUp()">Sign Up</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+
+
+    <div id="id02" class="modal">
+
+      <form class="modal-content animate">
+        <div class="imgcontainer">
+          <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+
+        <div class="container">
+          <label><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" id="loginEmailId" required value="S528180@nwmissouri.edu">
+
+          <label><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" id="loginPassword" required value="123456">
+
+
+         <!-- <input type="checkbox" checked="checked"> Remember me -->
+        </div>
+
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+		  <button type="button" class="signupbtn" onclick="login()">Login</button>
+         <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+        </div>
+      </form>
+    </div>
+
+
+<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li><a href="/home" class="btn btn-primary pull-right">Home</a></li>
+          <li id="loginButton"><button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Login</button></li>
+          <li id="signupButton"><button id = "signup" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button></li>
+		  <li id="signOutButton"><button onclick="location.href='/logout';" style="width:auto;">LogOut</button></li>
+          <li id="leaderboadButton"><button onclick="location.href='/leaderboard';">Leaderboard</button></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-  

@@ -1,5 +1,3 @@
 { 
-  "AWS_REGION": "us-west-2",
-  "STARTUP_SIGNUP_TABLE": "gsg-signup-app",
-  "NEW_SIGNUP_TOPIC": "arn:aws:sns:us-west-2:418469300571:signup-notifications"
+  "AWS_REGION": "us-east-2"
 }

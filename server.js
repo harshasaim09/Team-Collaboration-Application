@@ -17,19 +17,31 @@ var path = require('path');
 var fs = require('fs');
 var AWS = require('aws-sdk');
 var bodyParser = require("body-parser");
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 var app = express();
 
+//For cross origin requests
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-app.set('port', process.env.PORT || 3000);
+    next();
+}
+
+app.use(cookieParser());
+app.use(session({ resave: true, saveUninitialized: true, secret: 'ssshhhhh' }));
+app.use(allowCrossDomain);
+
+
+app.set('port', process.env.PORT || 3050);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-//app.use(express.favicon());
-//app.use(express.logger('dev'));
-//app.use(express.bodyParser());
-//app.use(express.methodOverride());
-//app.use(app.router);
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.locals.theme = process.env.THEME; //Make the THEME environment variable available to the app. 
 
 //Read config values from a JSON file.
@@ -46,49 +58,19 @@ var entries = [];
 app.locals.entries = entries;
 
 //GET pages.
-app.get('/', require('./controllers/index'));
-app.get('/home', require('./controllers/home'));
+app.use('/', require('./controllers/index'));
+app.use('/login',require('./controllers/login'));
+app.use('/signup',require('./controllers/signup'));
+app.use('/home', require('./controllers/home'));
+app.use('/leaderboard', require('./controllers/leaderboard'));
 
+app.get('/logout',function (req, res) {
+	session["teamName"] = undefined;
+	session["userId"] = undefined;
+	res.render('index');
+	
+});
 
-
-//POST signup form.
-/*
-app.post('/signup', function(req, res) {
-  var nameField = req.body.name,
-      emailField = req.body.email,
-      previewBool = req.body.previewAccess;
-  res.send(200);
-  signup(nameField, emailField, previewBool);
-}); 
-
-//Add signup form data to database.
-var signup = function (nameSubmitted, emailSubmitted, previewPreference) {
-  var formData = {
-    TableName: config.STARTUP_SIGNUP_TABLE,
-    Item: {
-      email: {'S': emailSubmitted}, 
-      name: {'S': nameSubmitted},
-      preview: {'S': previewPreference}
-    }
-  };
-  db.putItem(formData, function(err, data) {
-    if (err) {
-      console.log('Error adding item to database: ', err);
-    } else {
-      console.log('Form data added to database.');
-      var snsMessage = 'New signup: %EMAIL%'; //Send SNS notification containing email from form.
-      snsMessage = snsMessage.replace('%EMAIL%', formData.Item.email['S']);
-      sns.publish({ TopicArn: config.NEW_SIGNUP_TOPIC, Message: snsMessage }, function(err, data) {
-        if (err) {
-          console.log('Error publishing SNS message: ' + err);
-        } else {
-          console.log('SNS message sent.');
-        }
-      });  
-    }
-  });
-};
-*/
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
